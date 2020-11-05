@@ -1,12 +1,5 @@
-# Dependency directories
-node_modules/
+#ignore node_modules
+node_modules
 
-# Optional npm cache directory
-.npm
-
-# Optional REPL history
-.node_repl_history
-
-# dotenv environment variables file
+#ignore dotenv file
 .env
-.env.test
