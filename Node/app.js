@@ -18,8 +18,8 @@ app.use(session({
 
 const rateLimiter = require('express-rate-limit');
 app.use("/auth", rateLimiter({
-    windowMs: 10 * 60 * 1000,
-    max: 10
+    windowMs: 10 * 60 * 1000, //10 minutes reset time
+    max: 10 //10 reqests witihin the 10 minute time limit
 }));
 
 // const routerSession = require('./routes/session.js');
