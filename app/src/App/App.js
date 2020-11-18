@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import Signup from "../Pages/Signup"
+
 import './App.css';
 
 
@@ -21,7 +23,7 @@ function App() {
     
         </Route>
         <Route path="/signup">
-    
+          <Signup></Signup>
         </Route>
         <Route path="/login">
     
