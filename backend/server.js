@@ -27,19 +27,6 @@ app.use(routerSession);
 const routerAuth = require('./routes/auth.js');
 app.use(routerAuth);
 
-
-app.get("/", (req, res) => {
-
-    res.status(200).send({ data: "Welcome to the front page" });
-
-})
-
-app.get("/*", (req, res) => {
-
-    res.status(200).send({ data: "Welcome to the any page" });
-
-})
-
 // Status codes:
 // 200 - OK / succes
 // 401 - unauthorized

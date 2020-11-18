@@ -1,17 +1,8 @@
 const router = require("express").Router();
-
+const uuidv4 = require("uuid/v4")
 const bcrypt = require("bcrypt");
+
 const saltRounds = 10;
-
-const password = "secretpassword"
-const hashedPassword = "$2b$10$DlkamGZeoK.AW0lVH2LQX.MB1aPZ/cESfaxncx41NxKjQlsBkXfme"
-
-// bcrypt.hash(password, saltRounds, (error, hash) => {
-//     if (error) {
-//         console.log(error);
-//     }
-//     console.log(hash);
-// })
 
 bcrypt.compare(password, hashedPassword, (error, result) => {
 
@@ -30,10 +21,27 @@ router.post("/auth/login", (req, res) => {
 });
 
 router.post("/auth/signup", (req, res) => {
+
+    let firstName = req.body.firstName;
+    let lastName = req.body.lastName;
+    let email = req.body.email;
+    let id = uuidv4();
+
+    bcrypt.hash(req.body.password, saltRounds, (error, hash) => {
+        if (error) {
+            console.log(error);
+            return res.status(501).send({error});
+        }
+        console.log(hash);
+        let password = hash;
+    })
+
     return res.status(501).send({});
 })
 
 router.get("/auth/logout", (req, res) => {
+
+
 
     return res.status(501).send({});
 });
