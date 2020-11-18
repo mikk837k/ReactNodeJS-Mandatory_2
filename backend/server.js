@@ -22,18 +22,22 @@ app.use("/auth", rateLimiter({
     max: 10 //10 reqests witihin the 10 minute time limit
 }));
 
-// const routerSession = require('./routes/session.js');
-// app.use(routerSession);
-// const routerAuth = require('./routes/auth.js');
-// app.use(routerAuth);
+const routerSession = require('./routes/session.js');
+app.use(routerSession);
+const routerAuth = require('./routes/auth.js');
+app.use(routerAuth);
 
 
 app.get("/", (req, res) => {
+
     res.status(200).send({ data: "Welcome to the front page" });
+
 })
 
 app.get("/*", (req, res) => {
+
     res.status(200).send({ data: "Welcome to the any page" });
+
 })
 
 // Status codes:
