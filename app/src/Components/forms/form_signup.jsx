@@ -1,7 +1,8 @@
 
-function form_signup() {
+function Form_signup() {
     return (
         <form>
+            <h1>Signup</h1>
             <label>Firstname:</label>
             <input type="text" placeholder="Type in your firstname here"></input>
             <label>Lastname:</label>
@@ -17,4 +18,4 @@ function form_signup() {
     )
 }
 
-export default form_signup;
+export default Form_signup;
