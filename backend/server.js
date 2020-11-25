@@ -42,4 +42,6 @@ app.get("/*", (req, res) => {
 // 403 - forbidden
 // 500 - Internal server error like database errors
 
+
+console.log('server started');
 app.listen(8080);
