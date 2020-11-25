@@ -1,10 +1,8 @@
-import FormSignup from "../Components/form_signup";
+import FormSignup from "../Components/forms/form_signup";
 
 function Signup() {
     return(
-        <>
             <FormSignup></FormSignup>
-        </>
     )
 }
 
