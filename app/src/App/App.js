@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {useState} from "react";
 
 import Signup from "../Pages/Signup";
 import Login from "../Pages/Login";
@@ -10,17 +11,18 @@ import NavButton from "../Components/buttons/nav_button";
 
 import './App.css';
 
-
-
 function App() {
+
+  const [dest, setDest] = useState(["Login", "Signup"]);
+
   return (
     <Router>
     <header>
       <nav>
           <Link to="/">Home</Link>
           <Link to="/secret">Secret Page</Link>
-          <NavButton></NavButton>
-          <NavButton></NavButton>
+          <Link to={"/"+dest[0]}><NavButton destTitle={dest[0]}></NavButton></Link>
+          <Link to={"/"+dest[1]}><NavButton destTitle={dest[1]}></NavButton></Link>
       </nav>
     </header>
     <main>
