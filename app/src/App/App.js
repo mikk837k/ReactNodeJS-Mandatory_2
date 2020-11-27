@@ -6,10 +6,11 @@ import Logout from "../Pages/Logout";
 import Profile from "../Pages/Profile";
 import Secret from "../Pages/Secret";
 
-
 import NavButton from "../Components/buttons/nav_button";
 
 import './App.css';
+
+
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
       <nav>
           <Link to="/">Home</Link>
           <Link to="/secret">Secret Page</Link>
-        <NavButton></NavButton>
-        <NavButton></NavButton>
+          <NavButton></NavButton>
+          <NavButton></NavButton>
       </nav>
     </header>
     <main>
