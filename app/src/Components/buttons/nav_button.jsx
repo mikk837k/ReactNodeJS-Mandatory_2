@@ -1,6 +1,9 @@
-function Nav_button() {
+
+
+function Nav_button({destTitle}) {
+    
     return(
-        <button>Button</button>
+        <button>{destTitle}</button>
     )
 }
 
