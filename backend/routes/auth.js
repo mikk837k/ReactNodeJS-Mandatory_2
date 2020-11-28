@@ -6,47 +6,46 @@ const connectionUrl = "mongodb://localhost:27017";
 const saltRounds = 10;
 
 router.post("/auth/login", (req, res) => {
+    
+    const email = req.body.email;
+    let password = req.body.password;
 
-    console.log(req.body);
-    // const email = req.body.email;
-    // let password = req.body.password;
+    MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client) => {
+        if (error) {
+            console.log(error);
+            return res.status(501).send({ error });
+        }
+        const m2Db = client.db('m2Db');
+        const users = m2Db.collection('users');
 
-    // MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client) => {
-    //     if (error) {
-    //         console.log(error);
-    //         return res.status(501).send({ error });
-    //     }
-    //     const m2Db = client.db('m2Db');
-    //     const users = m2Db.collection('users');
+        users.findOne({ "email": email }, (error, result) => {
+            if (error) {
+                console.log(error);
+                return res.status(501).send({ error });
+            }
+            else if (result == null) {
 
-    //     users.findOne({ "email": email }, (error, result) => {
-    //         if (error) {
-    //             console.log(error);
-    //             return res.status(501).send({ error });
-    //         }
-    //         else if (result == null) {
-
-    //             return res.status(501).send({ errorMessage: "User email not found" });
-    //         }
-    //         else {
-    //             hashedPassword = result.password;
-    //             bcrypt.compare(password, hashedPassword, (error, result) => {
-    //                 if (error) {
-    //                     console.log(error);
-    //                     return res.status(501).send({ error });
-    //                 }
-    //                 else if (result) {
-    //                     req.session.email = email;
-    //                     req.session.password = hashedPassword;
-    //                     return res.status(200).send({ Succes: "User logged in" });
-    //                 }
-    //                 else {
-    //                     return res.status(501).send({ Succes: "Incorrect password" });
-    //                 }
-    //             })
-    //         }
-    //     });
-    // });
+                return res.status(501).send({ errorMessage: "User email not found" });
+            }
+            else {
+                hashedPassword = result.password;
+                bcrypt.compare(password, hashedPassword, (error, result) => {
+                    if (error) {
+                        console.log(error);
+                        return res.status(501).send({ error });
+                    }
+                    else if (result) {
+                        req.session.email = email;
+                        req.session.password = hashedPassword;
+                        return res.status(200).send({ Succes: "User logged in" });
+                    }
+                    else {
+                        return res.status(501).send({ Succes: "Incorrect password" });
+                    }
+                })
+            }
+        });
+    });
 });
 
 router.post("/auth/signup", (req, res) => {
@@ -80,7 +79,7 @@ router.post("/auth/signup", (req, res) => {
                     return res.status(501).send({ error });
                 }
                 else if (result != null) {
-
+                    console.log(email);
                     return res.status(501).send({ errorMessage: "User email already exists" });
                 }
                 else {

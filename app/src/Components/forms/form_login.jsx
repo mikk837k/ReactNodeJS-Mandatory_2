@@ -18,7 +18,7 @@ function Form_login() {
     async function submitForm(e) {
         //Collect user data from form
         let aUserData = e.target.parentElement.querySelectorAll(["[data-user]"]);
-        let oUserData = [];
+        let oUserData = {};
 
         //Iterate over array of user data
         aUserData.forEach(element => {
@@ -30,9 +30,11 @@ function Form_login() {
             oUserData[sElementName] = sElementValue;
         })
 
+        console.log(oUserData);
+
         fetch('http://localhost:8080/auth/login', {
             method: 'POST',
-            body: oUserData,
+            body: JSON.stringify(oUserData),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
