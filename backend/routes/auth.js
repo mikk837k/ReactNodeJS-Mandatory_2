@@ -83,8 +83,6 @@ router.post("/auth/signup", (req, res) => {
                 }
             });
         });
-
-
     })
 })
 
