@@ -110,9 +110,13 @@ function Form_signup() {
         })
 
         //Send data to backend
-        fetch("http//:localhost:8080//auth/signup", {
+        fetch("http://localhost:8080/auth/signup", {
             method: "POST",
-            body: oUserData
+            body: JSON.stringify(oUserData),
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
         })
             .then(res => res.json())
             .then(res => console.log(res))
@@ -120,8 +124,8 @@ function Form_signup() {
         //Reset the form
         e.target.parentElement.reset();
         //Redirect user to index page
-        // document.location.href = "./";
-
+        document.location.href = "./";
+    
     }
     return (
         <form>
