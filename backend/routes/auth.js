@@ -6,7 +6,7 @@ const connectionUrl = "mongodb://localhost:27017";
 const saltRounds = 10;
 
 router.post("/auth/login", (req, res) => {
-    
+
     const email = req.body.email;
     let password = req.body.password;
 
@@ -37,10 +37,10 @@ router.post("/auth/login", (req, res) => {
                     else if (result) {
                         req.session.email = email;
                         req.session.password = hashedPassword;
-                        return res.status(200).send({ Succes: "User logged in" });
+                        return res.status(200).send({ Succes: "User logged in", sessionExists: true });
                     }
                     else {
-                        return res.status(501).send({ Succes: "Incorrect password" });
+                        return res.status(501).send({ errorMessage: "Incorrect password" });
                     }
                 })
             }
@@ -91,15 +91,14 @@ router.post("/auth/signup", (req, res) => {
                         }
                         if (result.insertedCount === 1) {
                             console.log(result.ops[0]);
-                            return res.status(200).send({ Succes: "User has been created" });
+                            req.session.email = email;
+                            req.session.password = hashedPassword;
+                            return res.status(200).send({ Succes: "User has been created", sessionExists: true });
                         }
                     });
                 }
             });
         });
-
-        req.session.email = email;
-        req.session.password = password;
     })
 })
 
@@ -112,7 +111,7 @@ router.get("/auth/logout", (req, res) => {
         }
     })
     console.log(req.session);
-    return res.status(200).send({ Succes: "Session has been destroyed, logout complete" });
+    return res.status(200).send({ Succes: "Session has been destroyed, logout complete", sessionExists: false });
 });
 
 // Status codes:
