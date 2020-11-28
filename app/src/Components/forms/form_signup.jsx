@@ -23,7 +23,7 @@ function Form_signup() {
     }
     
     function checkPassword() {
-        const aPwElements = document.querySelectoi("[daa-password]");
+        const aPwElements = document.querySelectorAll("[data-password]");
         let eValdationField = document.querySelector("[name=validation]");
      
         //Check if password and confirm password are identical
@@ -73,7 +73,7 @@ function Form_signup() {
     }
     
     function checkForm(e) {
-        const aUserData = e.target.parentElement.querySelectoi(["[dta-user]"]);
+        const aUserData = e.target.parentElement.querySelectorAll(["[data-user]"]);
         const eValdationField = document.querySelector("[name=validation]")
         
         //Check if password and email fields are filled out
@@ -95,7 +95,7 @@ function Form_signup() {
         
     }
     
-    function submitForm(e, aUserData) {
+    async function submitForm(e, aUserData) {
         //Collect user data from form
         let oUserData = {};
         
@@ -110,11 +110,17 @@ function Form_signup() {
         })
 
         //Send data to backend
+        fetch("http//:localhost:8080//auth/signup", {
+            method: "POST",
+            body: oUserData
+        })
+        .then(res => res.json())
+        .then(res => console.log(res))
 
         //Reset the form
         e.target.parentElement.reset();
         //Redirect user to index page
-        document.location.href = "./";
+        // document.location.href = "./";
     
     }
     return (
